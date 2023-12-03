@@ -11,10 +11,11 @@ import net.spikesync.pingerdaemonrabbitmqclient.SilverCloudNode;
 
 public class SilverCloud {
 
-    private static final Logger logger = LoggerFactory.getLogger(PingerdaemonRabbitmqClientApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(SilverCloud.class);
 
 	private ArrayList<SilverCloudNode> scNodes;
 
+	
 	public SilverCloud(HashMap<String,String> scN) {
 		
 		this.scNodes = new ArrayList<SilverCloudNode>();
@@ -25,4 +26,20 @@ public class SilverCloud {
 		}
 	
 	public ArrayList<SilverCloudNode> getScNodes() { return this.scNodes; }
+
+	/*Don't use a method like below because it doesn't get you the list in the order PingHeatMap uses it!
+	 * Substituted with: this method in PingHeatMap: public ArrayList<String> getSilverCloudNodeNameList() 
+	 *
+	 * public ArrayList<String> getScNodeNames() { ... }
+	 */
+
+	public SilverCloudNode getNodeByName(String noNa) {
+		SilverCloudNode foundNode = this.scNodes.stream()
+				.filter(node -> noNa.equals(node.getNodeName()))
+				.findAny()
+				.orElse(null);
+		return foundNode;
+	}
+
+
 }

@@ -3,15 +3,18 @@ package net.spikesync.pingerdaemonrabbitmqclient;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.spikesync.pingerdaemonrabbitmqclient.PingEntry;
+import net.spikesync.api.SimplePingHeat;
 import net.spikesync.pingerdaemonrabbitmqclient.PingEntry.PINGHEAT;
 import net.spikesync.pingerdaemonrabbitmqclient.PingEntry.PINGRESULT;
-import net.spikesync.pingerdaemonrabbitmqclient.PingHeatData;
 
 public class PingHeatMap {
 
@@ -59,8 +62,17 @@ public class PingHeatMap {
 				+ this.pingHeatMap.keySet().size());
 	}
 
-	// Change to private access when the class is working properly
+	public ArrayList<String> getSilverCloudNodeNameList() {
+		ArrayList<String> silverCloudNodeNameList = new ArrayList<String>();
+		this.pingHeatMap.forEach((key, value) -> {
+			silverCloudNodeNameList.add(key.getNodeName());
+		});
+		return silverCloudNodeNameList;
+	}
+	
 	public HashMap<SilverCloudNode, HashMap<SilverCloudNode, PingHeatData>> getPingHeatmap() {
+		logger.debug("**************************&&&&&&&&&&&&&&&&&&&&&&&&&&&&& Now returning pingHeatMap: "
+				+ this.pingHeatMap.toString());
 		return pingHeatMap;
 	}
 
@@ -93,8 +105,7 @@ public class PingHeatMap {
 		pingHeatData.setLastPingSuccess(pingSuccessDate);
 	}
 
-	public void setLastTimePingFailed(SilverCloudNode rowNode, SilverCloud colNode, Date pingFailedDate) {
-		@SuppressWarnings("unlikely-arg-type")
+	public void setLastTimePingFailed(SilverCloudNode rowNode, SilverCloudNode colNode, Date pingFailedDate) {
 		PingHeatData pingHeatData = pingHeatMap.get(rowNode).get(colNode);
 		pingHeatData.setLastPingSuccess(pingFailedDate);
 	}
@@ -144,18 +155,73 @@ public class PingHeatMap {
 		}
 	}
 
+	public String getPingHeatMapAsString() {
+		String foHeMa = "";
+		for (Entry<SilverCloudNode, HashMap<SilverCloudNode, PingHeatData>> rowNode : pingHeatMap.entrySet()) {
+			for (Entry<SilverCloudNode, PingHeatData> colNode : rowNode.getValue().entrySet()) {
+				foHeMa += "(" + rowNode.getKey().getNodeName() + ", " + colNode.getKey().getNodeName()
+						+ "): [pingHeat: " + colNode.getValue().getPingHeat() + "]\n";
+			}
+		}
+	return foHeMa;
+	}
+
 	public void printPingHeatMap() {
 		for (Entry<SilverCloudNode, HashMap<SilverCloudNode, PingHeatData>> rowNode : pingHeatMap.entrySet()) {
-			int countCells = 0;
+			// int countCells = 0;
 			for (Entry<SilverCloudNode, PingHeatData> colNode : rowNode.getValue().entrySet()) {
-				++countCells;
+				// ++countCells;
 				logger.debug("pingHeat of pair after cool-down: (" + rowNode.getKey().getNodeName() + ", "
-						+ colNode.getKey().getNodeName() + "): " + colNode.getValue().getPingHeat()
-						+ "    --- cellCounter: " + countCells);
+						+ colNode.getKey().getNodeName() + "): " + colNode.getValue().getPingHeat());
+				// + " --- cellCounter: " + countCells);
 			}
 		}
 		logger.debug(" --------------------------------------------------------------------------------------------- ");
+	}
 
+	public ArrayList<SimplePingHeat> getPiHeMaAsSimplePingHeatList() {
+		ArrayList<SimplePingHeat> pingHeMaPiEnLi = new ArrayList<SimplePingHeat> ();
+		
+		for (Entry<SilverCloudNode, HashMap<SilverCloudNode, PingHeatData>> rowNode : pingHeatMap.entrySet()) {
+			
+			for (Entry<SilverCloudNode, PingHeatData> colNode : rowNode.getValue().entrySet()) {
+			
+				int cellPingHeat = this.getPingHeat(rowNode.getKey(),colNode.getKey()).getValue();
+				
+				pingHeMaPiEnLi.add(new SimplePingHeat(rowNode.getKey().getNodeName(), 
+						colNode.getKey().getNodeName(), cellPingHeat));				
+			}
+		}	
+		return pingHeMaPiEnLi;
+	}
+	
+	/*
+	 * Method  getPiHeMaAsNodeNameList() returns the SilverCloud node names in the order as they appear in the 
+	 * PingHeatMatrix.
+	 */
+	public Set<String> getPiHeMaAsNodeNameList() {
+		ArrayList<String> pingHeMaNoNaLi = new ArrayList<String>();
+		
+		//For future use: get a list of unique row node entries of type SilverCloudNode.
+		Set<Map.Entry<SilverCloudNode, HashMap<SilverCloudNode, PingHeatData>>> rowEntrySet = 
+				new HashSet<Map.Entry<SilverCloudNode,HashMap<SilverCloudNode,PingHeatData>>>();
+		for (Entry<SilverCloudNode, HashMap<SilverCloudNode, PingHeatData>> rowNode : pingHeatMap.entrySet()) {		
+			
+			//For future use.
+			rowEntrySet.add(rowNode);
+			
+			//Collect the row node names into a list with duplicates. The duplicates are the number of the number of columns.
+			pingHeMaNoNaLi.add(rowNode.getKey().getNodeName());			
+			}
+		/* Return only the set of unique node names in the order they were added into the Set. 
+		 * ChatGPT confirms:
+		 * The one-argument constructor of LinkedHashSet that takes a Set as an argument maintains the order of elements 
+		 * while ensuring uniqueness by filtering out duplicates. When you create a new LinkedHashSet by passing another 
+		 * Set as an argument, the iteration order of the elements in the resulting LinkedHashSet is determined by the 
+		 * iteration order of the elements in the provided Set.
+		 * THIS IS NOT EXPLICITLY MENTIONED IN THE API DOC!
+		 */
+		return new LinkedHashSet<>(pingHeMaNoNaLi);
 	}
 
 	public void setPingHeat(SilverCloudNode rowNode, SilverCloudNode colNode, PingHeatData heat) {
