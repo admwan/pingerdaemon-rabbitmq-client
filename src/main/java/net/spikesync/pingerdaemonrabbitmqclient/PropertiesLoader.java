@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class PropertiesLoader {
 	
+	private static final Logger logger = LoggerFactory.getLogger(PingMsgReader.class);
 	private static String FILENAME_PROPERTIES = "nospringboot.application.properties";
 	
     public static Properties loadProperties() { 
@@ -16,6 +20,7 @@ public class PropertiesLoader {
         try {
         	if(inputStream!=null) {
         		configuration.load(inputStream);
+        		logger.debug("*Properties test in PropertiesLoader* ------- Value of test-pingerdaemon-context: " + configuration.getProperty("test-pingerdaemon-context"));
         		inputStream.close();
         	}
         	else throw (new IOException("------------- The properties file with name: " + FILENAME_PROPERTIES + " CAN NOT BE FOUND!!!!!!\n"

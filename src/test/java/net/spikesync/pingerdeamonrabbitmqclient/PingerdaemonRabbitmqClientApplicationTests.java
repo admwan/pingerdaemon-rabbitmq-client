@@ -54,7 +54,7 @@ import java.util.Properties;
 		  DependencyInjectionTestExecutionListener.class
 		})
 @ContextConfiguration("classpath:beans.xml")
-//@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 class PingerdaemonRabbitmqClientApplicationTests {
 
  	private static final Logger logger = LoggerFactory.getLogger(PingerdaemonRabbitmqClientApplicationTests.class);
@@ -98,7 +98,7 @@ class PingerdaemonRabbitmqClientApplicationTests {
 	public PingerdaemonRabbitmqClientApplicationTests() { //Constructor in which the properties files is read.
  		prop = PropertiesLoader.loadProperties();
  		this.testingEnabled = prop.getProperty(TEST_PROPERTY);
- 		logger.debug("Value of test-pingerdaemon-context: " + this.testingEnabled);
+ 		logger.debug("*Properties test in PingerdaemonRabbitmqClientApplicationTests* --- Value of test-pingerdaemon-context: " + this.testingEnabled);
 	}
 	
 	@Test
