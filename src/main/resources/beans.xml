@@ -21,7 +21,7 @@
 	</bean>
 	
 	<bean id="pingMsgReader" class="net.spikesync.pingerdaemonrabbitmqclient.PingMsgReader">
-		<constructor-arg index="0" ref="silverCloud"/>
+		<constructor-arg index="0" ref="pingHeatMap"/>
 		<constructor-arg index="1" ref="amqpTemplate"/>
 		<constructor-arg index="2" ref="connectionFactory"/>
 		<constructor-arg index="3" ref="silverCloudQueue"/>
