@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Properties;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
 //import org.apache.logging.log4j.LogManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -33,6 +35,10 @@ import net.spikesync.pingerdaemonrabbitmqclient.SilverCloudNode;
 public class SimpleJunit5Test {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SimpleJunit5Test.class);
+	private Properties prop;
+	private static String TEST_PROPERTY = "test-pingerdaemon-context";
+	@Value("${test-pingerdaemon-context}")
+	private String testingEnabled;
 
 	@Autowired
 	private SilverCloud sc;
@@ -81,4 +87,17 @@ public class SimpleJunit5Test {
 	static void tearDownAll() {
 		System.out.println("---Inside tearDownAll---");
 	}
+	
+	private boolean testingEnabled() {
+		logger.debug("Value of this.testingEnabled: " + this.testingEnabled);
+
+		if ((this.testingEnabled != null) && (testingEnabled.compareToIgnoreCase("TRUE") >= 0)) {
+			logger.debug("Method testingEnabled is returning true!!");
+			return true;
+		} else {
+			logger.debug("Method testingEnabled is returning false!!");
+			return false;
+		}
+	}
+
 } 
