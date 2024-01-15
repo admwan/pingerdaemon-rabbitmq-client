@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 public class PropertiesLoader {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PingMsgReader.class);
-	private static String FILENAME_PROPERTIES = "nospringboot.application.properties";
+	private static String FILENAME_PROPERTIES = "new_no_springboot.properties";
 	
     public static Properties loadProperties() { 
         Properties configuration = new Properties();

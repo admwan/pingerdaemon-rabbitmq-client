@@ -37,6 +37,7 @@ public class SimpleJunit5Test {
 	private static final Logger logger = LoggerFactory.getLogger(SimpleJunit5Test.class);
 	private Properties prop;
 	private static String TEST_PROPERTY = "test-pingerdaemon-context";
+
 	@Value("${test-pingerdaemon-context}")
 	private String testingEnabled;
 
@@ -68,6 +69,8 @@ public class SimpleJunit5Test {
 		System.out.println("Logger enabled for debugging? " + logger.isDebugEnabled());
 		System.out.println("Logger enabled for error? " + logger.isErrorEnabled());
 		System.out.println("Now in SimpleJunit5Test.messageTest ---  System.out, not the logger!!!!");
+		System.out.println("Value of SimpleJunit5Test.testingEnabled: " + testingEnabled);
+
 		
 		ArrayList<SilverCloudNode> nodes = sc.getScNodes();
 		SilverCloudNode targetNode = null;

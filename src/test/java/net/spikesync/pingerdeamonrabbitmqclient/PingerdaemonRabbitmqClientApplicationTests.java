@@ -40,6 +40,8 @@ import net.spikesync.pingerdaemonrabbitmqclient.PropertiesLoader;
 import net.spikesync.pingerdaemonrabbitmqclient.SilverCloudNode;
 
 import org.junit.jupiter.api.condition.EnabledIf;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Properties;
 
@@ -65,13 +67,13 @@ class PingerdaemonRabbitmqClientApplicationTests {
 	private Properties prop;
 	private static String TEST_PROPERTY = "test-pingerdaemon-context";
 	@Value("${test-pingerdaemon-context}")
-	private String testingEnabled;
+	private static String testingEnabled;
 
 	@BeforeAll // From digitalocean Junit 5 tutorial
 	static void beforeAll() {
 		logger.debug("**--- Executed once before all test methods in this class ---**");
-		System.out.println("@BeforeAll with System.out, logging doesn't work properly!!!");
-		
+		System.out.println("@BeforeAll in PingerdaemonRabbitmqClientApplicationTests with System.out, logging doesn't work properly!!!");
+		System.out.println("Value of PingerdaemonRabbitmqClientApplicationTests.testingEnabled: " + testingEnabled);
 	}
 
 	@BeforeEach // From digitalocean Junit 5 tutorial
@@ -97,10 +99,10 @@ class PingerdaemonRabbitmqClientApplicationTests {
 
 	public PingerdaemonRabbitmqClientApplicationTests() { // Constructor in which the properties files is read.
 		prop = PropertiesLoader.loadProperties();
-		this.testingEnabled = prop.getProperty(TEST_PROPERTY);
-		logger.debug(
+		testingEnabled = prop.getProperty(TEST_PROPERTY);
+		System.out.println(
 				"*Properties test in PingerdaemonRabbitmqClientApplicationTests* --- Value of test-pingerdaemon-context: "
-						+ this.testingEnabled);
+						+ testingEnabled);
 	}
 
 	@Test
@@ -119,6 +121,12 @@ class PingerdaemonRabbitmqClientApplicationTests {
 		assertThat(pingHeat).isEqualByComparingTo(PINGHEAT.TEPID);
 	}
 
+	@Test
+	@EnabledIfSystemProperty(named="ordinary.property.test", matches="TRUE")
+	void testSpElConditional() {
+		System.out.println("Conditionally executed this test because systemProperty('ordinary.property.test').equals('TRUE') ");
+	}
+	
 	@Test
 	@EnabledIf("testingEnabled")
 	void contextLoads() {
