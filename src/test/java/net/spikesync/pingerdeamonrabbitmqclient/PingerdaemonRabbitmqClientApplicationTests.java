@@ -1,6 +1,5 @@
 package net.spikesync.pingerdeamonrabbitmqclient;
 
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,10 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.runner.RunWith;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.junit.jupiter.api.Assertions.*;
+
 
 //import org.apache.logging.log4j.Logger;
 //import org.apache.logging.log4j.LogManager;
@@ -91,7 +92,7 @@ class PingerdaemonRabbitmqClientApplicationTests {
 		logger.debug("**--- Executed once after all test methods in this class ---**");
 	}
 
-	@BeforeClass
+	@BeforeAll
 	static void setTestsConfigurations(ExtensionContext ctx) {
 		// TestConfiguration.setup(false);
 
