@@ -45,12 +45,12 @@ public class SimpleJunit5Test {
 
 	@BeforeAll
 	static void initAll() {
-		System.out.println("---Inside initAll---");
+		System.out.println("---Inside SimpleJunit5Test.initAll---");
 	}
 
 	@BeforeEach
 	void init(TestInfo testInfo) {
-		System.out.println("Start..." + testInfo.getDisplayName());
+		System.out.println("Start SimpleJunit5Test." + testInfo.getDisplayName());
 	}
 
 	@Test
