@@ -7,17 +7,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.condition.EnabledIf;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
+
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.junit.jupiter.api.Assertions.*;
-
-
-//import org.apache.logging.log4j.Logger;
-//import org.apache.logging.log4j.LogManager;
 
 import org.springframework.amqp.rabbit.test.RabbitListenerTest;
 import org.springframework.amqp.rabbit.test.context.SpringRabbitTest;
@@ -27,6 +25,7 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
+
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -40,10 +39,8 @@ import net.spikesync.pingerdaemonrabbitmqclient.PingHeatMap;
 import net.spikesync.pingerdaemonrabbitmqclient.PropertiesLoader;
 import net.spikesync.pingerdaemonrabbitmqclient.SilverCloudNode;
 
-import org.junit.jupiter.api.condition.EnabledIf;
-import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Properties;
 
 //@RabbitListenerTest
@@ -52,7 +49,6 @@ import java.util.Properties;
 @ExtendWith(SpringExtension.class)
 @TestExecutionListeners(value = { CustomTestExecutionListener.class, DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration("classpath:beans.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
 class PingerdaemonRabbitmqClientApplicationTests {
 
 	private static final Logger logger = LoggerFactory.getLogger(PingerdaemonRabbitmqClientApplicationTests.class);
@@ -73,7 +69,8 @@ class PingerdaemonRabbitmqClientApplicationTests {
 	@BeforeAll // From digitalocean Junit 5 tutorial
 	static void beforeAll() {
 		logger.debug("**--- Executed once before all test methods in this class ---**");
-		System.out.println("@BeforeAll in PingerdaemonRabbitmqClientApplicationTests with System.out, logging doesn't work properly!!!");
+		System.out.println(
+				"@BeforeAll in PingerdaemonRabbitmqClientApplicationTests with System.out, logging doesn't work properly!!!");
 		System.out.println("Value of PingerdaemonRabbitmqClientApplicationTests.testingEnabled: " + testingEnabled);
 	}
 
@@ -106,6 +103,14 @@ class PingerdaemonRabbitmqClientApplicationTests {
 						+ testingEnabled);
 	}
 
+	/* A test on whether the JUnit5 static assert method works properly */	
+	@Test
+	@EnabledIf("testingEnabled")
+	void testStaticAssertMethod() {
+		int result = 2 + 2;
+		assertEquals(4, result);
+	}
+
 	@Test
 	@EnabledIf("testingEnabled")
 	void testHeatMap() {
@@ -119,15 +124,16 @@ class PingerdaemonRabbitmqClientApplicationTests {
 
 		PINGHEAT pingHeat = pingHeatMap.getPingHeat(rowNode, colNode);
 		logger.debug("Value of pingHeatMap.getPingHeat(rowNode CAPTUW, colNode THORFW) is: " + pingHeat);
-		assertThat(pingHeat).isEqualByComparingTo(PINGHEAT.TEPID);
+		assertEquals(pingHeat,PINGHEAT.TEPID);
 	}
 
 	@Test
-	@EnabledIfSystemProperty(named="ordinary.property.test", matches="TRUE")
+	@EnabledIfSystemProperty(named = "ordinary.property.test", matches = "TRUE")
 	void testSpElConditional() {
-		System.out.println("Conditionally executed this test because systemProperty('ordinary.property.test').equals('TRUE') ");
+		System.out.println(
+				"Conditionally executed this test because systemProperty('ordinary.property.test').equals('TRUE') ");
 	}
-	
+
 	@Test
 	@EnabledIf("testingEnabled")
 	void contextLoads() {
@@ -138,18 +144,20 @@ class PingerdaemonRabbitmqClientApplicationTests {
 			logger.debug("ApplicationContext variable is null!!");
 			return;
 		}
-		assertThat(context).isNotNull();
-		assertThat(context.getBean(net.spikesync.pingerdaemonrabbitmqclient.SilverCloud.class)).isNotNull();
+		assertNotNull(context);
+		assertNotNull(context.getBean(net.spikesync.pingerdaemonrabbitmqclient.SilverCloud.class));
 
 	}
 
 	@SuppressWarnings("unused") // This method is used by JUnit 5 @EnabledIf to determine whether to execute the
 								// test or not.
 	private boolean testingEnabled() {
-		logger.debug("Value of this.testingEnabled in method testingEnabled(): " + this.testingEnabled);
-		if ((this.testingEnabled != null) && (testingEnabled.compareToIgnoreCase("TRUE") >= 0)) {
-			logger.debug("Method testingEnabled is returning true!!\n"); logger.debug("Value of this.testingEnabled: " + this.testingEnabled);
-			System.out.println("Method testingEnabled is returning true!!\n"); logger.debug("Value of this.testingEnabled: " + this.testingEnabled);
+		logger.debug("Value of this.testingEnabled in method testingEnabled(): " + testingEnabled);
+		if ((testingEnabled != null) && (testingEnabled.compareToIgnoreCase("TRUE") >= 0)) {
+			logger.debug("Method testingEnabled is returning true!!\n");
+			logger.debug("Value of this.testingEnabled: " + testingEnabled);
+			System.out.println("Method testingEnabled is returning true!!\n");
+			logger.debug("Value of this.testingEnabled: " + testingEnabled);
 			return true;
 		} else {
 			logger.debug("Method testingEnabled is returning false!!");

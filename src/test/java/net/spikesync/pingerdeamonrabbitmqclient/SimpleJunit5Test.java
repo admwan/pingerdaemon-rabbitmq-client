@@ -1,7 +1,6 @@
 package net.spikesync.pingerdeamonrabbitmqclient;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Properties;
