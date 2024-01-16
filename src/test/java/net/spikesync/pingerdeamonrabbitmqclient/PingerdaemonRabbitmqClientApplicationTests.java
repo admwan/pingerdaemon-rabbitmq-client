@@ -97,6 +97,7 @@ class PingerdaemonRabbitmqClientApplicationTests {
 
 	public PingerdaemonRabbitmqClientApplicationTests() { // Constructor in which the properties files is read.
 		prop = PropertiesLoader.loadProperties();
+		
 		testingEnabled = prop.getProperty(TEST_PROPERTY);
 		System.out.println(
 				"*Properties test in PingerdaemonRabbitmqClientApplicationTests* --- Value of test-pingerdaemon-context: "
@@ -105,7 +106,7 @@ class PingerdaemonRabbitmqClientApplicationTests {
 
 	/* A test on whether the JUnit5 static assert method works properly */	
 	@Test
-	@EnabledIf("testingEnabled")
+	//@EnabledIf("testingEnabled")
 	void testStaticAssertMethod() {
 		int result = 2 + 2;
 		assertEquals(4, result);
