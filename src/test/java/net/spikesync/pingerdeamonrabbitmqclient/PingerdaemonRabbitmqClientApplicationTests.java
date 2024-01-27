@@ -113,7 +113,7 @@ class PingerdaemonRabbitmqClientApplicationTests {
 	}
 
 	@Test
-	@EnabledIf("testingEnabled")
+	//@EnabledIf("testingEnabled")
 	void testHeatMap() {
 		PingHeatMap pingHeatMap = context.getBean(PingHeatMap.class);
 		// Test these two nodes whether a pingHeat value is set properly and then
@@ -129,14 +129,14 @@ class PingerdaemonRabbitmqClientApplicationTests {
 	}
 
 	@Test
-	@EnabledIfSystemProperty(named = "ordinary.property.test", matches = "TRUE")
+	//@EnabledIfSystemProperty(named = "ordinary.property.test", matches = "TRUE")
 	void testSpElConditional() {
 		System.out.println(
 				"Conditionally executed this test because systemProperty('ordinary.property.test').equals('TRUE') ");
 	}
 
 	@Test
-	@EnabledIf("testingEnabled")
+	//@EnabledIf("testingEnabled")
 	void contextLoads() {
 		if (context != null)
 			logger.debug("**************** AutowiredCapableBeanFactory: " + context.toString());
