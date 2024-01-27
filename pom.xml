@@ -29,28 +29,6 @@
 			<version>6.0.11</version>
 		</dependency>
 
-
-		<!-- OUDE SLF4J met OUDE Log4J !!!!!!!!!!! -->
-		<!-- 
-   <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.0</version>
-   </dependency>
- 
-   <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.0</version>
-   </dependency>
-
-   <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.14</version>
-   </dependency>
-	-->
-
 		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
 		This 
 		dependency pulls in slf4j-api!!! See:
@@ -89,20 +67,20 @@
 		</dependency>
 
 		<!--
-		https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+		https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>5.9.1</version>
 			<scope>test</scope>
 		</dependency>
+	-->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>5.9.1</version>
 			<scope>test</scope>
 		</dependency>
-
 
 	<!--
 		https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
@@ -148,5 +126,25 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
 </project>
+
+		<!-- OUDE SLF4J met OUDE Log4J !!!!!!!!!!! -->
+		<!-- 
+   <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.0</version>
+   </dependency>
+ 
+   <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.0</version>
+   </dependency>
+
+   <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.14</version>
+   </dependency>
+	-->
