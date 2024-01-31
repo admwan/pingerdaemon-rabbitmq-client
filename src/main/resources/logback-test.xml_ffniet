@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+ 
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} %msg%n</pattern>
+        </encoder>
+    </appender>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%kvp- %msg%n</pattern>
+    </encoder>
+  </appender>
+
+
+
+<!-- 
+     <logger name="net.spikesync" level="DEBUG" additivity="false"/>
+    <logger name="org.springframework" level="DEBUG"/>F
+ -->
+
+
+<!--  If the name attribute does not refer to a parent element, it should contain the fully qualified classname to which the configuration applies -->
+	<logger
+		name="net.spikesync.pingerdaemonrabbitmqclient.PingerdaemonRabbitmqClientApplicationTests"
+		level="debug">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger
+		name="net.spikesync.pingerdaemonrabbitmqclient.PingHeatMap"
+		level="debug">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+		<logger
+		name="net.spikesync.pingerdaemonrabbitmqclient.CustomTestExecutionListener"
+		level="debug">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<logger
+		name="net.spikesync.pingerdaemonrabbitmqclient.SimpleJunit5Test"
+		level="debug">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

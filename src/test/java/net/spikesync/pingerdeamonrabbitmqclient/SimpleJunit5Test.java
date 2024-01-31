@@ -17,9 +17,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//import org.apache.logging.log4j.Logger;
-//import org.apache.logging.log4j.LogManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
@@ -95,7 +92,7 @@ public class SimpleJunit5Test {
 		logger.debug("Value of this.testingEnabled: " + this.testingEnabled);
 
 		if ((this.testingEnabled != null) && (testingEnabled.compareToIgnoreCase("TRUE") >= 0)) {
-			logger.debug("Method testingEnabled is returning true!!");
+			logger.info("Method testingEnabled is returning true!!");
 			return true;
 		} else {
 			logger.debug("Method testingEnabled is returning false!!");
