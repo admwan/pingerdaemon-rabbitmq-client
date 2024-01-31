@@ -31,7 +31,7 @@ import net.spikesync.pingerdaemonrabbitmqclient.SilverCloudNode;
 @ContextConfiguration("classpath:beans.xml")
 public class SimpleJunit5Test {
 	
-	private static final Logger logger = LoggerFactory.getLogger(SimpleJunit5Test.class);
+	private static final Logger logger = LoggerFactory.getLogger(net.spikesync.pingerdeamonrabbitmqclient.SimpleJunit5Test.class);
 	private Properties prop;
 	private static String TEST_PROPERTY = "test-pingerdaemon-context";
 
@@ -54,14 +54,9 @@ public class SimpleJunit5Test {
 	@Test
 	public void messageTest() {
 		
-//		try {
-//			LogbackConfigurator.configure("logback.xml");
-//		} catch (JoranException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		
 		logger.info("Now in SimpleJunit5Test.messageTest!!!! LOGGER WORKS @INFO ------------------------------------------");
+		logger.debug("Now in SimpleJunit5Test.messageTest!!!! LOGGER WORKS @DEBUG ------------------------------------------");
 		System.out.println("Logger name: " + logger.getName());
 		System.out.println("Logger enabled for debugging? " + logger.isDebugEnabled());
 		System.out.println("Logger enabled for error? " + logger.isErrorEnabled());

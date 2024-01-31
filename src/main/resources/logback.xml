@@ -60,29 +60,25 @@
 <!--  If the name attribute does not refer to a parent element, it should contain the fully qualified classname to which the configuratioh applies -->
 	<logger
 		name="net.spikesync.pingerdaemonrabbitmqclient.PingerdaemonRabbitmqClientApplicationTests"
-		level="debug">
+		level="error">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
 	<logger
 		name="net.spikesync.pingerdaemonrabbitmqclient.PingHeatMap"
-		level="debug">
+		level="error">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
-		<logger
-		name="net.spikesync.pingerdaemonrabbitmqclient.CustomTestExecutionListener"
-		level="debug">
+		<logger name="net.spikesync.pingerdaemonrabbitmqclient.CustomTestExecutionListener" level="error">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
-	<logger
-		name="net.spikesync.pingerdaemonrabbitmqclient.SimpleJunit5Test"
-		level="debug">
+	<logger name="net.spikesync.pingerdeamonrabbitmqclient.SimpleJunit5Test" level="debug">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	 
-	<root level="debug">
+	<root level="info">
 		<appender-ref ref="STDOUT" />
 	</root>
 
