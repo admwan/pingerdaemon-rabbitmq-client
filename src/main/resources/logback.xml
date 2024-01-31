@@ -66,13 +66,13 @@
 
 	<logger
 		name="net.spikesync.pingerdaemonrabbitmqclient.PingHeatMap"
-		level="DEBUG">
+		level="debug">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
 		<logger
 		name="net.spikesync.pingerdaemonrabbitmqclient.CustomTestExecutionListener"
-		level="DEBUG">
+		level="debug">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
@@ -82,7 +82,7 @@
 		<appender-ref ref="STDOUT" />
 	</logger>
 	 
-	<root level="info">
+	<root level="debug">
 		<appender-ref ref="STDOUT" />
 	</root>
 
