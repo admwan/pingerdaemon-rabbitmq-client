@@ -31,7 +31,7 @@ import net.spikesync.pingerdaemonrabbitmqclient.SilverCloudNode;
 @ContextConfiguration("classpath:beans.xml")
 public class SimpleJunit5Test {
 	
-	private static final Logger logger = LoggerFactory.getLogger(net.spikesync.pingerdeamonrabbitmqclient.SimpleJunit5Test.class);
+	private static final Logger logger = LoggerFactory.getLogger(SimpleJunit5Test.class);
 	private Properties prop;
 	private static String TEST_PROPERTY = "test-pingerdaemon-context";
 

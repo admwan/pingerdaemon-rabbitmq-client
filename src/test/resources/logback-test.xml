@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 <configuration>
-	<appender name="consoleAppender"
-		class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<Pattern>.%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n
-			</Pattern>
-		</encoder>
-		<!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter"> <level>TRACE</level> 
-			</filter> -->
-	</appender>
+
 	<appender name="STDOUT"
 		class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
@@ -37,6 +29,7 @@
 			</Pattern>
 		</encoder>
 	</appender>
+
 	<appender name="minuteRollingFileAppender"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy
@@ -57,15 +50,25 @@
 
 
 	<!-- If the name attribute does not refer to a parent element, it should 
-		contain the fully qualified classname to which the configuratioh applies -->
-
+		contain the classname to which the configuration pertains -->
 	<logger
-		name="net.spikesync.pingerdaemonrabbitmqclient.PingHeatMap"
+		name="net.spikesync.pingerdaemonrabbitmqclient.PingerdaemonRabbitmqClientApplicationTests"
 		level="error">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
-	<!-- For the loggers of the test classes see: src/test/resources/logback-test.xml -->
+	<logger
+		name="net.spikesync.pingerdaemonrabbitmqclient.CustomTestExecutionListener"
+		level="error">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger
+		name="net.spikesync.pingerdeamonrabbitmqclient.SimpleJunit5Test"
+		level="debug">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
 	<root level="info">
 		<appender-ref ref="STDOUT" />
 	</root>
