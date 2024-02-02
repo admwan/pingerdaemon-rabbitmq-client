@@ -43,12 +43,12 @@ public class SimpleJunit5Test {
 
 	@BeforeAll
 	static void initAll() {
-		System.out.println("---Inside SimpleJunit5Test.initAll---");
+		logger.debug("---Inside SimpleJunit5Test.initAll---");
 	}
 
 	@BeforeEach
 	void init(TestInfo testInfo) {
-		System.out.println("Start SimpleJunit5Test." + testInfo.getDisplayName());
+		logger.debug("Start SimpleJunit5Test." + testInfo.getDisplayName());
 	}
 
 	@Test
@@ -57,12 +57,6 @@ public class SimpleJunit5Test {
 		
 		logger.info("Now in SimpleJunit5Test.messageTest!!!! LOGGER WORKS @INFO ------------------------------------------");
 		logger.debug("Now in SimpleJunit5Test.messageTest!!!! LOGGER WORKS @DEBUG ------------------------------------------");
-		System.out.println("Logger name: " + logger.getName());
-		System.out.println("Logger enabled for debugging? " + logger.isDebugEnabled());
-		System.out.println("Logger enabled for error? " + logger.isErrorEnabled());
-		System.out.println("Now in SimpleJunit5Test.messageTest ---  System.out, not the logger!!!!");
-		System.out.println("Value of SimpleJunit5Test.testingEnabled: " + testingEnabled);
-
 		
 		ArrayList<SilverCloudNode> nodes = sc.getScNodes();
 		SilverCloudNode targetNode = null;
@@ -75,12 +69,12 @@ public class SimpleJunit5Test {
 	
 	@AfterEach
 	void tearDown(TestInfo testInfo) {
-		System.out.println("Finished..." + testInfo.getDisplayName());
+		logger.debug("Finished..." + testInfo.getDisplayName());
 	}
 
 	@AfterAll
 	static void tearDownAll() {
-		System.out.println("---Inside tearDownAll---");
+		logger.debug("---Inside tearDownAll---");
 	}
 	
 	private boolean testingEnabled() {

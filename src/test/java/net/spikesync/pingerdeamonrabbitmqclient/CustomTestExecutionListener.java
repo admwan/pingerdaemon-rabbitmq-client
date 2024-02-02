@@ -11,23 +11,23 @@ public class CustomTestExecutionListener implements TestExecutionListener, Order
     private static final Logger logger = LoggerFactory.getLogger(CustomTestExecutionListener.class);
     
     public void beforeTestClass(TestContext testContext) throws Exception {
-        logger.info("beforeTestClass : {}", testContext.getTestClass());
+        logger.debug("beforeTestClass : {}", testContext.getTestClass());
     }; 
     
     public void prepareTestInstance(TestContext testContext) throws Exception {
-        logger.info("prepareTestInstance : {}", testContext.getTestClass());
+        logger.debug("prepareTestInstance : {}", testContext.getTestClass());
     }; 
     
     public void beforeTestMethod(TestContext testContext) throws Exception {
-        logger.info("beforeTestMethod : {}", testContext.getTestMethod());
+        logger.debug("beforeTestMethod : {}", testContext.getTestMethod());
     }; 
     
     public void afterTestMethod(TestContext testContext) throws Exception {
-        logger.info("afterTestMethod : {}", testContext.getTestMethod());
+        logger.debug("afterTestMethod : {}", testContext.getTestMethod());
     }; 
     
     public void afterTestClass(TestContext testContext) throws Exception {
-        logger.info("afterTestClass : {}", testContext.getTestClass());
+        logger.debug("afterTestClass : {}", testContext.getTestClass());
     }
 
     @Override

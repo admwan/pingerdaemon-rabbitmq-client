@@ -72,8 +72,6 @@ class PingerdaemonRabbitmqClientApplicationTests {
 	@BeforeAll // From digitalocean Junit 5 tutorial
 	static void beforeAll() {
 		logger.debug("**--- Executed once before all test methods in this class ---**");
-		System.out.println("@BeforeAll in PingerdaemonRabbitmqClientApplicationTests with System.out, logging doesn't work properly!!!");
-		System.out.println("Value of PingerdaemonRabbitmqClientApplicationTests.testingEnabled: " + testingEnabled);
 	}
 
 	@BeforeEach // From digitalocean Junit 5 tutorial
@@ -100,7 +98,7 @@ class PingerdaemonRabbitmqClientApplicationTests {
 	public PingerdaemonRabbitmqClientApplicationTests() { // Constructor in which the properties files is read.
 		prop = PropertiesLoader.loadProperties();
 		testingEnabled = prop.getProperty(TEST_PROPERTY);
-		System.out.println(
+		logger.debug(
 				"*Properties test in PingerdaemonRabbitmqClientApplicationTests* --- Value of test-pingerdaemon-context: "
 						+ testingEnabled);
 	}
@@ -124,7 +122,7 @@ class PingerdaemonRabbitmqClientApplicationTests {
 	@Test
 	@EnabledIfSystemProperty(named="ordinary.property.test", matches="TRUE")
 	void testSpElConditional() {
-		System.out.println("Conditionally executed this test because systemProperty('ordinary.property.test').equals('TRUE') ");
+		logger.debug("Conditionally executed this test because systemProperty('ordinary.property.test').equals('TRUE') ");
 	}
 	
 	@Test
@@ -148,11 +146,9 @@ class PingerdaemonRabbitmqClientApplicationTests {
 		logger.debug("Value of this.testingEnabled in method testingEnabled(): " + this.testingEnabled);
 		if ((this.testingEnabled != null) && (testingEnabled.compareToIgnoreCase("TRUE") >= 0)) {
 			logger.debug("Method testingEnabled is returning true!!\n"); logger.debug("Value of this.testingEnabled: " + this.testingEnabled);
-			System.out.println("Method testingEnabled is returning true!!\n"); logger.debug("Value of this.testingEnabled: " + this.testingEnabled);
 			return true;
 		} else {
 			logger.debug("Method testingEnabled is returning false!!");
-			System.out.println("Method testingEnabled is returning false!!");
 			return false;
 		}
 	}

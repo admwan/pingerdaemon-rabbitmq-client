@@ -52,14 +52,14 @@
 	<!-- If the name attribute does not refer to a parent element, it should 
 		contain the classname to which the configuration pertains -->
 	<logger
-		name="net.spikesync.pingerdaemonrabbitmqclient.PingerdaemonRabbitmqClientApplicationTests"
-		level="error">
+		name="net.spikesync.pingerdeamonrabbitmqclient.PingerdaemonRabbitmqClientApplicationTests"
+		level="debug">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
 	<logger
-		name="net.spikesync.pingerdaemonrabbitmqclient.CustomTestExecutionListener"
-		level="error">
+		name="net.spikesync.pingerdeamonrabbitmqclient.CustomTestExecutionListener"
+		level="debug">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
