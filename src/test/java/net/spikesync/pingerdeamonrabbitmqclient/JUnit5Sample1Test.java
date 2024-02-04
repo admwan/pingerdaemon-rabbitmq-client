@@ -8,12 +8,29 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import net.spikesync.pingerdaemonrabbitmqclient.SilverCloudNode;
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "classpath:beans.xml")
 public class JUnit5Sample1Test {
+
+	private static final Logger logger = LoggerFactory.getLogger(JUnit5Sample1Test.class);
+
+	@Autowired
+	private ApplicationContext context;
+	private SilverCloudNode sc;
 
   @BeforeAll
   static void beforeAll() {
-    System.out.println("**--- Executed once before all test methods in this class ---**");
+    logger.info("**--- Executed once before all test methods in this class ---**");
   }
 
   @BeforeEach

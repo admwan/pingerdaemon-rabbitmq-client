@@ -53,8 +53,8 @@
 	</logger>
 
 	<logger
-		name="net.spikesync.pingerdaemonrabbitmqclient.PingHeatMap"
-		level="INFO">
+		name="net.spikesync.pingerdaemonrabbitmqclient.JUnit5Sample1Test"
+		level="DEBUG">
 		<appender-ref ref="consoleAppender" />
 	</logger>
 
