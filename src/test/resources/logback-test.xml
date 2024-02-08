@@ -7,8 +7,7 @@
 		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
 			by default -->
 		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%kvp-
-				%msg%n</pattern>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%kvp- %msg%n</pattern>
 		</encoder>
 	</appender>
 
@@ -53,19 +52,22 @@
 		contain the classname to which the configuration pertains -->
 	<logger
 		name="net.spikesync.pingerdeamonrabbitmqclient.PingerdaemonRabbitmqClientApplicationTests"
-		level="debug">
+		level="debug"
+		additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
 	<logger
 		name="net.spikesync.pingerdeamonrabbitmqclient.CustomTestExecutionListener"
-		level="debug">
+		level="debug"
+		additivity="false">"
 		<appender-ref ref="STDOUT" />
 	</logger>
 
 	<logger
 		name="net.spikesync.pingerdeamonrabbitmqclient.SimpleJunit5Test"
-		level="debug">
+		level="debug"
+		additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
