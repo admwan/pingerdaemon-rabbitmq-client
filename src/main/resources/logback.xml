@@ -5,7 +5,8 @@
 	<appender name="STDOUT"
 		class="ch.qos.logback.core.ConsoleAppender">
 		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
-			by default -->
+			by default. REMEMBER that whatever appears in the <pattern> element will be literally
+			displayed in the log lines (including line breaks)! -->
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%kvp- %msg%n</pattern>
 		</encoder>
@@ -58,7 +59,7 @@
 	</logger>
 
 	<!-- For the loggers of the test classes see: src/test/resources/logback-test.xml -->
-	<root level="debug">
+	<root level="info">
 		<appender-ref ref="STDOUT" />
 	</root>
 
