@@ -61,7 +61,7 @@
 
 	<logger
 		name="net.spikesync.pingerdaemonrabbitmqclient.PingHeatMap"
-		level="info">
+		level="debug">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
