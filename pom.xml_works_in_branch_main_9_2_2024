@@ -17,10 +17,8 @@
 	<properties>
 		<java.version>21</java.version>
 		<maven.compiler.release>21</maven.compiler.release>
-											 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
 
 	<dependencies>
 		<!--
@@ -38,24 +36,23 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.4.11</version>
-						<scope>runtime</scope>
-
+			<version>1.4.14</version>
 		</dependency>
 
+		<!-- Hieronder staan TWEE dependencies die nodig zijn om een verbinding 
+		te maken met een RabbitMQ server Dit zijn andere dependencies dan in de POM 
+		met Spring-Boot!! -->
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
 			<artifactId>amqp-client</artifactId>
 			<version>5.7.3</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit</artifactId>
 			<version>3.0.9</version>
 		</dependency>
-
 
 		<!--
 		https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit-test -->
@@ -75,7 +72,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.junit.vintage</groupId>
 			<artifactId>junit-vintage-engine</artifactId>
@@ -83,14 +79,12 @@
 			<scope>test</scope>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-params</artifactId>
 			<version>5.9.1</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -123,5 +117,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
 </project>
