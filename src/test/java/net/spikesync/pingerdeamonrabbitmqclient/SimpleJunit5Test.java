@@ -77,6 +77,8 @@ public class SimpleJunit5Test {
 		logger.debug("---Inside tearDownAll---");
 	}
 	
+	
+	//Method testingEnabled is not part of jupiter, so this is never executed (check with code coverage tool, e.g. EclEmma).
 	private boolean testingEnabled() {
 		logger.debug("Value of this.testingEnabled: " + this.testingEnabled);
 
