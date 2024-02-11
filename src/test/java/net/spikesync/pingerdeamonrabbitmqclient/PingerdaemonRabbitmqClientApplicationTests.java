@@ -143,9 +143,9 @@ class PingerdaemonRabbitmqClientApplicationTests {
 	@SuppressWarnings("unused") // This method is used by JUnit 5 @EnabledIf to determine whether to execute the
 								// test or not.
 	private boolean testingEnabled() {
-		logger.debug("Value of this.testingEnabled in method testingEnabled(): " + this.testingEnabled);
-		if ((this.testingEnabled != null) && (testingEnabled.compareToIgnoreCase("TRUE") >= 0)) {
-			logger.debug("Method testingEnabled is returning true!!\n"); logger.debug("Value of this.testingEnabled: " + this.testingEnabled);
+		logger.debug("Value of this.testingEnabled in method testingEnabled(): " + PingerdaemonRabbitmqClientApplicationTests.testingEnabled);
+		if ((PingerdaemonRabbitmqClientApplicationTests.testingEnabled != null) && (testingEnabled.compareToIgnoreCase("TRUE") >= 0)) {
+			logger.debug("Method testingEnabled is returning true!!\n"); logger.debug("Value of this.testingEnabled: " + PingerdaemonRabbitmqClientApplicationTests.testingEnabled);
 			return true;
 		} else {
 			logger.debug("Method testingEnabled is returning false!!");
